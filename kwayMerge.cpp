@@ -7,21 +7,15 @@
 #include <math.h>
 using namespace std;
 
-
-//-----------------------------------------//
-// a helper function to print arrays       //
-//-----------------------------------------//
-void print(std::vector <int> const &a)
-{
-    for(int i=0; i < a.size(); i++)
-        std::cout << a.at(i) << " ";
-    cout << endl;
+// a helper function to print arrays
+void print(vector <int> const &a) {
+    for (int i = 0; i < a.size(); i++) {
+        cout << a.at(i) << " ";
+    	cout << endl;
+    }
 }
 
-//-----------------------------------------//
-// ArgMin(M) is a helper function that     //
-// return the index of the lowest value    //
-//-----------------------------------------//
+// ArgMin(M) is a helper function that returns the index of the lowest value
 int ArgMin(const vector<pair<int,int>> & M) {
         int l = 0;
         //gets the size of M
@@ -39,11 +33,8 @@ int ArgMin(const vector<pair<int,int>> & M) {
         return l;
 }
 
-//-----------------------------------------//
-// splits A into k sub-arrays              //
-//-----------------------------------------//
-vector<vector<int>> split(const vector<int> & A, int k)
-{
+// splits A into k sub-arrays
+vector<vector<int>> split(const vector<int> & A, int k) {
         //size of array
         int n = A.size();
         int q = n/k;
@@ -82,11 +73,10 @@ vector<vector<int>> split(const vector<int> & A, int k)
         return newA;
 }
 
-//-------------------------------------------------//
-// k-way merge implemented as in the assignment    //
-// if all Aj's are sorted, the output must be      //
-// sorted as well                                  //
-//-------------------------------------------------//
+/*k-way merge implemented as in the assignment    
+ if all Aj's are sorted, the output must be      
+ sorted as well
+ */                                  
 vector<int> kWayMerge(const vector<vector<int>> & Aj)
 {
         //k is the size of Aj
@@ -131,9 +121,7 @@ vector<int> kWayMerge(const vector<vector<int>> & Aj)
         return A;
 }
 
-//-----------------------------------------//
 // mergesort                               //
-//-----------------------------------------//
 void kWayMergeSort(vector<int> & A, int k)
 {
         //base case if array is <= 1 in length
@@ -155,27 +143,21 @@ void kWayMergeSort(vector<int> & A, int k)
         }
 }
 
-//-----------------------------------------//
-// reads k and the entries in A            //
-// calls kWayMergeSort and prints A        //
-// do not change anything below            //
-//-----------------------------------------//
 #ifndef TESTING
 int main()
 {
     string line;
     getline(cin, line);
-    std::vector<int> A;
+    vector<int> A;
     int k = atoi(line.c_str());
-
-    while(true){
+    while(true) {
         string line;
-        if(!getline(cin, line))
+        if(!getline(cin, line)) {
             break;
+	}
         int a = atoi(line.c_str());
         A.push_back(a);
     }
-
     print(A);
     kWayMergeSort(A, k);
     print(A);

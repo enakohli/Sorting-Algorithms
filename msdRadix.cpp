@@ -5,24 +5,15 @@
 #include <iostream>
 #include <chrono>
 #include <assert.h>
-
-
-
 using namespace std;
 using std::cin;
 using std::cout;
 using std::endl;
 using ns = chrono::nanoseconds;
 using get_time = chrono::steady_clock;
-
-
 using namespace std;
 
-
-//---------------------------------------------------------//
-// BucketSort helper function that is going to be used     // 
-// in MSDSort below                                        //
-//---------------------------------------------------------//
+// BucketSort helper function that is going to be used in MSDSort below
 void bucketSort(vector<unsigned long int> &A, int d, int m) {
 	int n = A.size(); //size of array
         int val = 1;
@@ -52,10 +43,7 @@ void bucketSort(vector<unsigned long int> &A, int d, int m) {
 	}
 }
 
-//---------------------------------------------------------//
-// InsertionSort helper function that is going to be used  // 
-// in MSDSort below                                        //
-//---------------------------------------------------------//
+// InsertionSort helper function that is going to be used in MSDSort below                                        
 void insertionSort(vector<unsigned long int> &A, int n) {
     unsigned long int key = 0;
     int j = 0;
@@ -71,10 +59,7 @@ void insertionSort(vector<unsigned long int> &A, int n) {
     }
 } 
 
-//---------------------------------------------------------//
-// MSDSort implemented as in the assignment description    //
-//---------------------------------------------------------//
-
+// MSDSort implemented as in the assignment description
 void MSDSort(vector<unsigned long int> &A, int m, int l, int r, int d, int threshold, int &total_num_calls) {
 	total_num_calls++;
 	int size = A.size();
@@ -139,37 +124,25 @@ void MSDSort(vector<unsigned long int> &A, int m, int l, int r, int d, int thres
 	}
 }
 
-
-//--------------------------------------------//
-// helper function to generage a random array //
-//--------------------------------------------//
-
-void getRandomArray(vector<unsigned long int>& A)
-{
+// helper function to generage a random array 
+void getRandomArray(vector<unsigned long int>& A) {
     for (unsigned int i = 0; i < A.size(); i++)
         A[i] = (unsigned long int) rand() * (unsigned long int)  rand() * (unsigned long int)  rand();
 
 }
 
 #ifndef TESTING
-int main()
-{
+int main() {
     int m = 10;
     int threshold = 2;
     int n = 100000;
     vector<unsigned long int> A;
-
-    // for tests on a random array, set this variable to false
     bool read_input_from_cin = true;
     
-    if (read_input_from_cin)
-    {
-        cin >> n;  // read the size of array A
-        cin >> threshold;  // read the threshold for the sorting algorithm 
-
+    if (read_input_from_cin) {
+        cin >> n; 
+        cin >> threshold;  
         A.resize(n);
-
-        // read array A from standard input
         for (int i = 0; i < n; i++) {
             cin >> A[i];
 	}
@@ -180,30 +153,22 @@ int main()
         getRandomArray(A);
 
     }
-    auto start = get_time::now(); //use auto keyword to minimize typing strokes :)
-
+    auto start = get_time::now(); 
     int total_num_calls = 0;
     MSDSort(A, m, 0, n-1, 0, threshold, total_num_calls);
  
     auto end = get_time::now();
     auto diff = end - start;
 
-    
-    bool sorted = true;
-    // print re-arranged A  to standard output    
+    bool sorted = true;  
     cout << A[0] << endl;
-    for (int i = 1; i < n; i++)
-    {
+    for (int i = 1; i < n; i++) {
         cout << A[i] << endl;
-        if (A[i] < A[i - 1])
-            sorted = false;       
+        if (A[i] < A[i - 1]) {
+            sorted = false;   
+	}    
     }
-    
-     cout << total_num_calls << endl;
-        
-    // uncomment this line to have running time printed to the standard output
-    //cout << "Time to sort: " <<  chrono::duration <double, milli>(diff).count() << " ms" << endl;
-
+    cout << total_num_calls << endl;
     return 0;
 
 }
